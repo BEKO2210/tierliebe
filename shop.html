@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Tierliebe verbindet</title>
+    <link rel="stylesheet" href="shop.css">
+    <!-- Font Awesome für Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="paw"></div>
+                </div>
+                <span class="logo-text">Tierliebe verbindet</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="#">Über uns</a></li>
+                    <li><a href="#" class="upload">Upload</a></li>
+                    <li>
+                        <a href="#" class="nav-cart-link" id="nav-cart-toggle" title="Warenkorb öffnen">
+                            <span>Warenkorb</span>
+                            <div class="header-cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="header-cart-badge">0</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Tierliebe Shop</h1>
+                <p>Entdecke hochwertige Produkte für deine tierischen Lieblinge und unterstütze mit jedem Kauf Tierschutzprojekte.</p>
+                <div class="hero-buttons">
+                    <a href="#kategorien" class="btn primary" title="Zu den Kategorien">Jetzt stöbern</a>
+                    <a href="#bestseller" class="btn secondary" title="Zu den Bestsellern">Bestseller</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kategorien Section -->
+    <section id="kategorien" class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entdecke unsere Produktkategorien</h2>
+            </div>
+            
+            <div class="categories-grid">
+                <!-- Kategorie: Hunde -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Hunde">
+                        <div class="category-image category-dog"></div>
+                        <div class="category-content">
+                            <h3>Hunde</h3>
+                            <p>Alles für deinen treuen Begleiter</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Katzen -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Katzen">
+                        <div class="category-image category-cat"></div>
+                        <div class="category-content">
+                            <h3>Katzen</h3>
+                            <p>Produkte für deinen schnurrenden Liebling</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Kleintiere -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Kleintiere">
+                        <div class="category-image category-small-pets"></div>
+                        <div class="category-content">
+                            <h3>Kleintiere</h3>
+                            <p>Für Kaninchen, Hamster und Co.</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Vögel -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Vögel">
+                        <div class="category-image category-birds"></div>
+                        <div class="category-content">
+                            <h3>Vögel</h3>
+                            <p>Für gefiederte Freunde</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Aquaristik -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Aquaristik">
+                        <div class="category-image category-aqua"></div>
+                        <div class="category-content">
+                            <h3>Aquaristik</h3>
+                            <p>Für die Unterwasserwelt</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Terraristik -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Terraristik">
+                        <div class="category-image category-terra"></div>
+                        <div class="category-content">
+                            <h3>Terraristik</h3>
+                            <p>Für Reptilien und Amphibien</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Pferde -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Pferde">
+                        <div class="category-image category-horse"></div>
+                        <div class="category-content">
+                            <h3>Pferde</h3>
+                            <p>Alles für Reiter und Pferd</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Kategorie: Tierpflege -->
+                <div class="category-card">
+                    <a href="#" class="category-link" title="Zur Kategorie Tierpflege">
+                        <div class="category-image category-grooming"></div>
+                        <div class="category-content">
+                            <h3>Tierpflege</h3>
+                            <p>Pflege & Hygiene für alle Tiere</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Message for Content -->
+    <div id="shop-content" class="container">
+        <div class="loading-message">
+            <i class="fas fa-paw fa-spin"></i>
+            <p>Shop wird geladen...</p>
+        </div>
+    </div>
+    
+    <!-- Bestseller Section -->
+    <section id="bestseller" class="products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unsere Bestseller</h2>
+            </div>
+            
+            <div class="shop-filters">
+                <div class="filter-section">
+                    <div class="filter-item">
+                        <button class="filter-btn" title="Filter öffnen">
+                            <i class="fas fa-filter"></i>
+                            Filter
+                        </button>
+                        <div class="filter-dropdown">
+                            <div class="price-range">
+                                <h4>Preisbereich</h4>
+                                <div class="price-range-label">
+                                    <span>Min</span>
+                                    <span>Max</span>
+                                </div>
+                                <div class="price-inputs">
+                                    <input type="number" class="price-input" placeholder="0">
+                                    <input type="number" class="price-input" placeholder="200">
+                                </div>
+                            </div>
+                            
+                            <div class="filter-category">
+                                <h4>Kategorie</h4>
+                                <div class="filter-list">
+                                    <div class="filter-list-item">
+                                        <input type="checkbox" id="cat-dog" checked>
+                                        <label for="cat-dog">Hunde</label>
+                                    </div>
+                                    <div class="filter-list-item">
+                                        <input type="checkbox" id="cat-cat" checked>
+                                        <label for="cat-cat">Katzen</label>
+                                    </div>
+                                    <div class="filter-list-item">
+                                        <input type="checkbox" id="cat-small">
+                                        <label for="cat-small">Kleintiere</label>
+                                    </div>
+                                    <div class="filter-list-item">
+                                        <input type="checkbox" id="cat-birds">
+                                        <label for="cat-birds">Vögel</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-buttons">
+                                <button class="filter-reset" title="Filter zurücksetzen">Zurücksetzen</button>
+                                <button class="filter-apply" title="Filter anwenden">Anwenden</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <button class="filter-btn" title="Angebote anzeigen">
+                            <i class="fas fa-tag"></i>
+                            Angebote
+                        </button>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <button class="filter-btn" title="Bewertung anzeigen">
+                            <i class="fas fa-star"></i>
+                            Bewertung
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="sort-section">
+                    <button class="sort-btn" title="Nach Beliebtheit sortieren">
+                        <i class="fas fa-sort-amount-down"></i>
+                        Sortieren nach: Beliebtheit
+                    </button>
+                </div>
+            </div>
+            
+            <div class="products-container">
+                <div class="products-grid">
+                    <!-- Produkt 1 -->
+                    <div class="product-card">
+                        <span class="product-badge badge-new">Neu</span>
+                        <div class="product-image product-image-dog-food"></div>
+                        <div class="product-content">
+                            <div class="product-category">Hunde</div>
+                            <div class="product-title">Premium Hundefutter (Bio)</div>
+                            <div class="product-price">
+                                <span class="current-price">€24,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-count">(42)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 2 -->
+                    <div class="product-card">
+                        <span class="product-badge badge-sale">-20%</span>
+                        <div class="product-image product-image-cat-toys"></div>
+                        <div class="product-content">
+                            <div class="product-category">Katzen</div>
+                            <div class="product-title">Katzen-Spielzeug Set (5-teilig)</div>
+                            <div class="product-price">
+                                <span class="current-price">€15,99</span>
+                                <span class="old-price">€19,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-count">(87)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 3 -->
+                    <div class="product-card">
+                        <div class="product-image product-image-dog-bed"></div>
+                        <div class="product-content">
+                            <div class="product-category">Hunde</div>
+                            <div class="product-title">Hundebett Deluxe (waschbar)</div>
+                            <div class="product-price">
+                                <span class="current-price">€49,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-count">(28)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 4 -->
+                    <div class="product-card">
+                        <div class="product-image product-image-rabbit-cage"></div>
+                        <div class="product-content">
+                            <div class="product-category">Kleintiere</div>
+                            <div class="product-title">Kaninchen-Gehege XXL</div>
+                            <div class="product-price">
+                                <span class="current-price">€79,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-count">(14)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 5 -->
+                    <div class="product-card">
+                        <span class="product-badge badge-out">Ausverkauft</span>
+                        <div class="product-image product-image-bird-house"></div>
+                        <div class="product-content">
+                            <div class="product-category">Vögel</div>
+                            <div class="product-title">Designer Vogelhaus (Holz)</div>
+                            <div class="product-price">
+                                <span class="current-price">€34,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-count">(95)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart disabled" title="Produkt ist ausverkauft">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Ausverkauft
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 6 -->
+                    <div class="product-card">
+                        <div class="product-image product-image-cat-tree"></div>
+                        <div class="product-content">
+                            <div class="product-category">Katzen</div>
+                            <div class="product-title">Katzenbaum Luxus (160cm)</div>
+                            <div class="product-price">
+                                <span class="current-price">€89,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-count">(36)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 7 -->
+                    <div class="product-card">
+                        <span class="product-badge badge-sale">-15%</span>
+                        <div class="product-image product-image-dog-toys"></div>
+                        <div class="product-content">
+                            <div class="product-category">Hunde</div>
+                            <div class="product-title">Hundespielzeug-Set (robust)</div>
+                            <div class="product-price">
+                                <span class="current-price">€16,99</span>
+                                <span class="old-price">€19,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-count">(52)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produkt 8 -->
+                    <div class="product-card">
+                        <div class="product-image product-image-grooming"></div>
+                        <div class="product-content">
+                            <div class="product-category">Tierpflege</div>
+                            <div class="product-title">Fellpflege-Set (universal)</div>
+                            <div class="product-price">
+                                <span class="current-price">€29,99</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-count">(41)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" title="In den Warenkorb legen">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    In den Warenkorb
+                                </button>
+                                <button class="wishlist-btn" title="Zur Wunschliste hinzufügen">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="page-item page-prev" title="Vorherige Seite">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <a href="#" class="page-item active" title="Seite 1">1</a>
+                    <a href="#" class="page-item" title="Seite 2">2</a>
+                    <a href="#" class="page-item" title="Seite 3">3</a>
+                    <a href="#" class="page-item" title="Seite 4">4</a>
+                    <a href="#" class="page-item page-next" title="Nächste Seite">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Über uns</h3>
+                    <p>Tierliebe verbindet ist eine Plattform für alle Tierliebhaber, um Erfahrungen zu teilen und sich mit Gleichgesinnten zu vernetzen.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook" title="Facebook-Seite besuchen"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" title="Twitter-Seite besuchen"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" title="Instagram-Seite besuchen"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube" title="YouTube-Kanal besuchen"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Schnelllinks</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html" title="Zur Startseite">Home</a></li>
+                        <li><a href="community.html" title="Zur Community-Seite">Community</a></li>
+                        <li><a href="galerie.html" title="Zur Galerie-Seite">Galerie</a></li>
+                        <li><a href="shop.html" title="Zum Shop">Shop</a></li>
+                        <li><a href="#" title="Zur Über-uns-Seite">Über uns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kundenservice</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" title="Zu den Bestellungen">Bestellungen</a></li>
+                        <li><a href="#" title="Zum Versand & Lieferung">Versand & Lieferung</a></li>
+                        <li><a href="#" title="Zu den Rücksendungen">Rücksendungen</a></li>
+                        <li><a href="#" title="Zu den Zahlungsmethoden">Zahlungsmethoden</a></li>
+                        <li><a href="#" title="Zu den FAQs">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Rechtliches</h3>
+                    <ul class="footer-links">
+                        <li><a href="datenschutz.html" title="Zur Datenschutzerklärung">Datenschutzerklärung</a></li>
+                        <li><a href="agb.html" title="Zu den AGB">AGB</a></li>
+                        <li><a href="#" title="Zum Impressum">Impressum</a></li>
+                        <li><a href="#" title="Zum Kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Tierliebe verbindet. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Warenkorb -->
+    <div class="cart-overlay"></div>
+    <div class="cart-wrapper">
+        <div class="cart-header">
+            <h3>Dein Warenkorb</h3>
+            <button class="close-cart" title="Warenkorb schließen">&times;</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Dein Warenkorb ist leer</p>
+                <p>Stöbere in unserem Shop und füge Produkte hinzu!</p>
+            </div>
+            <!-- Hier werden die Warenkorbeinträge dynamisch eingefügt -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Gesamtsumme:</span>
+                <span class="total-amount">€0,00</span>
+            </div>
+            <button class="checkout-btn" title="Zur Kasse gehen">Zur Kasse</button>
+        </div>
+    </div>
+    
+    <div class="cart-icon" title="Warenkorb öffnen">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">0</span>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="cart.js"></script>
+
+    <!-- JavaScript -->
+    <script src="shop.js"></script>
+</body>
+</html>

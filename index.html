@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tierliebe verbindet</title>
+    <style>
+        /* Grundlegende Reset-Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Farbpalette */
+        :root {
+            --primary: #4F6F52;      /* Olivgrün */
+            --secondary: #8D7B68;    /* Erdton */
+            --accent: #D14D72;       /* Highlight-Rot */
+            --light-accent: #A4907C; /* Helles Erdbraun */
+            --background: #F8F5F0;   /* Helles Creme */
+            --text: #333333;         /* Dunkler Text */
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header-Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .paw {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .paw::before, .paw::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .paw::before {
+            width: 12px;
+            height: 12px;
+            left: 9px;
+            top: 9px;
+        }
+
+        .paw::after {
+            width: 5px;
+            height: 5px;
+            bottom: 2px;
+            left: 4px;
+            box-shadow: 9px 0 0 white, 18px 0 0 white;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--light-accent);
+        }
+
+        nav a.upload {
+            background-color: var(--accent);
+        }
+
+        nav a.upload:hover {
+            background-color: #c03a5f;
+        }
+
+        /* Upload Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.4s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dropzone {
+            border: 2px dashed var(--primary);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: rgba(79, 111, 82, 0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .dropzone:hover {
+            background-color: rgba(79, 111, 82, 0.1);
+        }
+
+        .dropzone-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .file-status {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .consent-section {
+            margin-top: 1.5rem;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            border: 1px solid rgba(79, 111, 82, 0.2);
+        }
+
+        .consent-check {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .consent-check input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .consent-link {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .consent-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            background-color: rgba(79, 111, 82, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .form-submit .btn {
+            padding: 12px 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Ende Modal Styles */
+
+        /* Hero-Styles */
+        .hero {
+            margin-top: 80px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8ZG9nLGNhdHx8fHx8fDE3MTEwNDg5NjA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .hero-content p {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #c03a5f;
+            transform: translateY(-2px);
+        }
+
+        /* Feature-Karten */
+        .features {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            width: 80px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img-1 {
+            background-image: url('https://images.unsplash.com/photo-1601979031925-424e53b6caaa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8ZG9nLGNhdHx8fHx8fDE3MTEwNDg5NjA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .card-img-2 {
+            background-image: url('https://images.unsplash.com/photo-1533738363-b7f9aef128ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y2F0fHx8fHx8MTcxMTA0OTA3MA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .card-img-3 {
+            background-image: url('https://images.unsplash.com/photo-1548439739-0c3dad3ed469?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8dHVydGxlfHx8fHx8MTcxMTA0OTA5MQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img-1,
+        .card:hover .card-img-2,
+        .card:hover .card-img-3 {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .card-text {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        /* Gemeinschaft-Bereich */
+        .community {
+            padding: 4rem 0;
+            background-color: var(--light-accent);
+            color: white;
+        }
+
+        .community-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .community h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .community p {
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .community-btn {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .community-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            margin: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .stat-text {
+            font-size: 1rem;
+        }
+
+        /* Upload-Bereich */
+        .upload-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .upload-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .upload-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8ZG9nfHx8fHx8MTcxMTA0OTExNw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .upload-steps {
+            margin-top: 1.5rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Shop-Bereich */
+        .shop {
+            padding: 4rem 0;
+            background-color: var(--background);
+        }
+
+        .shop-container {
+            text-align: center;
+        }
+
+        .products {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 200px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 4rem;
+        }
+
+        .product-content {
+            padding: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer-Bereich */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .footer-logo .paw {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            width: 40px;
+            background-color: var(--accent);
+            bottom: -5px;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .turtle-box {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .turtle {
+            display: inline-block;
+            font-size: 24px;
+            transition: transform 0.5s ease;
+        }
+        
+        .turtle-box:hover .turtle {
+            transform: rotate(360deg);
+        }
+        
+        /* Reaktionsbuttons */
+        .reaction-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .reaction-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reaction-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .reaction-btn.active {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .upload-container {
+                flex-direction: column;
+            }
+            
+            .upload-image {
+                height: 300px;
+                width: 100%;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-submit {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background-color: #c03a5f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="paw"></div>
+                </div>
+                <span class="logo-text">Tierliebe verbindet</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="#" class="upload">Upload</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Video hochladen</h2>
+            <form id="upload-form" class="upload-form">
+                <div class="dropzone" id="dropzone">
+                    <div class="dropzone-content">
+                        <span>Dateien hier ablegen oder</span>
+                        <button type="button" class="upload-btn">Durchsuchen</button>
+                        <input type="file" id="file" name="file" accept="video/*" hidden>
+                    </div>
+                    <div class="file-status">
+                        <span class="file-name">Keine Datei ausgewählt</span>
+                    </div>
+                </div>
+
+                <div class="consent-section">
+                    <div class="consent-check">
+                        <input type="checkbox" id="agb-consent" name="agb-consent" required>
+                        <label for="agb-consent">Ich stimme den <a href="agb.html" class="consent-link" target="_blank">Allgemeinen Geschäftsbedingungen</a> zu.</label>
+                    </div>
+                    <div class="consent-check">
+                        <input type="checkbox" id="privacy-consent" name="privacy-consent" required>
+                        <label for="privacy-consent">Ich habe die <a href="datenschutz.html" class="consent-link" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten gemäß der DSGVO zu.</label>
+                    </div>
+                    <div class="consent-check">
+                        <input type="checkbox" id="usage-consent" name="usage-consent" required>
+                        <label for="usage-consent">Ich erteile die Erlaubnis, mein hochgeladenes Video zu bearbeiten und auf den sozialen Medien von "Tierliebe verbindet" zu teilen.</label>
+                    </div>
+                    <div class="consent-info">
+                        <p>Hinweis: "Tierliebe verbindet" wird deine Daten nur für die angegebenen Zwecke verwenden und nicht an Dritte weitergeben, die nicht in unserer Datenschutzerklärung aufgeführt sind. Du kannst deine Einwilligung jederzeit widerrufen, indem du uns unter datenschutz@tierliebe-verbindet.de kontaktierst.</p>
+                    </div>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn">Hochladen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Teile die schönsten Momente mit deinem Tier</h1>
+            <p>Unsere Community lebt von deinen Geschichten - lustig, rührend, außergewöhnlich.</p>
+            <button class="btn" id="upload-btn" title="Die hochgeladenen Videos werden von unserem Team&#10;professionell bearbeitet und&#10;auf unseren sozialen Netzwerken geteilt!">Video hochladen</button>
+        </div>
+    </section>
+
+    <!-- Feature-Karten -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Entdecke die Community</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">
+                        <div class="card-img-1"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Tierische Helden</h3>
+                        <p class="card-text">Geschichten von Tieren, die Leben verändert haben – bewegend und inspirierend.</p>
+                        <div class="reaction-buttons">
+                            <button class="reaction-btn">❤️ 124</button>
+                            <button class="reaction-btn">🐾 38</button>
+                            <button class="reaction-btn">🐢 12</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <div class="card-img-2"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Lustige Momente</h3>
+                        <p class="card-text">Die witzigsten Tier-Videos und -Fotos, die garantiert für gute Laune sorgen.</p>
+                        <div class="reaction-buttons">
+                            <button class="reaction-btn">❤️ 86</button>
+                            <button class="reaction-btn">🐾 42</button>
+                            <button class="reaction-btn">🐢 7</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <div class="card-img-3"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Reptilienfreunde</h3>
+                        <p class="card-text">Entdecke die faszinierende Welt der Reptilien und tausche dich mit Gleichgesinnten aus.</p>
+                        <div class="reaction-buttons">
+                            <button class="reaction-btn">❤️ 53</button>
+                            <button class="reaction-btn">🐾 19</button>
+                            <button class="reaction-btn">🐢 31</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community-Bereich -->
+    <section class="community">
+        <div class="container community-content">
+            <h2 class="section-title">Werde Teil unserer Gemeinschaft</h2>
+            <p>Tausende Tierfreunde haben bereits ihre besonderen Momente geteilt und neue Freundschaften geknüpft. Werde auch du Teil dieser wachsenden Community für Tierliebhaber.</p>
+            <a href="#" class="btn community-btn">Community entdecken</a>
+            
+            <div class="community-stats">
+                <div class="stat">
+                    <div class="stat-number">5.280+</div>
+                    <div class="stat-text">Mitglieder</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">12.450+</div>
+                    <div class="stat-text">Uploads</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">47.300+</div>
+                    <div class="stat-text">Kommentare</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload-Bereich -->
+    <section class="upload-section">
+        <div class="container upload-container">
+            <div class="upload-image"></div>
+            <div class="upload-content">
+                <h2 class="section-title">So einfach teilst du deine Tier-Geschichten</h2>
+                <p>Egal ob lustige, rührende oder außergewöhnliche Momente – mit wenigen Klicks kannst du deine Erlebnisse mit der Community teilen.</p>
+                
+                <div class="upload-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Registrieren</h4>
+                            <p>Erstelle schnell und einfach ein Konto, um Teil der Community zu werden.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Hochladen</h4>
+                            <p>Wähle dein Bild oder Video aus und füge eine Beschreibung hinzu.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Teilen</h4>
+                            <p>Nach kurzer Prüfung wird dein Beitrag veröffentlicht und kann von allen gesehen werden.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn" id="upload-btn-2">Jetzt hochladen</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop-Bereich -->
+    <section class="shop">
+        <div class="container shop-container">
+            <h2 class="section-title">Shop für Tierfreunde</h2>
+            <p>Entdecke tolle Produkte für dich und deine tierischen Freunde in unserem Shop.</p>
+            
+            <div class="products">
+                <div class="product">
+                    <div class="product-img">🐾</div>
+                    <div class="product-content">
+                        <h4 class="product-title">"Tierliebe" T-Shirt</h4>
+                        <div class="product-price">19,95 €</div>
+                        <button class="btn product-btn">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-img">🐱</div>
+                    <div class="product-content">
+                        <h4 class="product-title">Katzenspielzeug Set</h4>
+                        <div class="product-price">12,50 €</div>
+                        <button class="btn product-btn">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-img">🐢</div>
+                    <div class="product-content">
+                        <h4 class="product-title">Schildkröten-Tasse</h4>
+                        <div class="product-price">9,95 €</div>
+                        <button class="btn product-btn">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-img">🐶</div>
+                    <div class="product-content">
+                        <h4 class="product-title">Hundehalsband</h4>
+                        <div class="product-price">15,95 €</div>
+                        <button class="btn product-btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <div class="paw"></div>
+                    </div>
+                    <span class="logo-text">Tierliebe verbindet</span>
+                </div>
+                <p>Die Plattform, die Tierliebhaber zusammenbringt – zum Lachen, Mitfühlen und Freude teilen.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Galerie</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Über uns</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Impressum</a></li>
+                    <li><a href="#">Datenschutz</a></li>
+                    <li><a href="#">AGB</a></li>
+                    <li><a href="#">Cookie-Richtlinie</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <ul class="footer-links">
+                    <li>info@tierliebe-verbindet.de</li>
+                    <li>+49 (0) 123 456789</li>
+                    <li>Tierstraße 123, 12345 Tierstadt</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Tierliebe verbindet | Made with ❤️ for animals | <span class="turtle-box"><span class="turtle">🐢</span></span> Power
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="cart.js"></script>
+
+    <!-- JavaScript für Funktionalität -->
+    <script>
+        // Modal-Funktionalität
+        const modal = document.getElementById("uploadModal");
+        const uploadBtn = document.getElementById("upload-btn");
+        const uploadLinks = document.querySelectorAll("a.upload");
+        const closeBtn = document.querySelector(".close-modal");
+        const dropzone = document.getElementById("dropzone");
+        const fileInput = document.getElementById("file");
+        const fileName = document.querySelector(".file-name");
+
+        // Modal öffnen bei Klick auf Upload-Button oder Upload-Links
+        uploadBtn.addEventListener("click", function() {
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden"; // Verhindern des Scrollens im Hintergrund
+        });
+
+        uploadLinks.forEach(link => {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                modal.style.display = "block";
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        // Modal schließen
+        closeBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+
+        // Schließen wenn außerhalb des Modals geklickt wird
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // Datei-Upload-Funktionalität
+        dropzone.addEventListener("click", function() {
+            fileInput.click();
+        });
+
+        dropzone.addEventListener("dragover", function(e) {
+            e.preventDefault();
+            dropzone.classList.add("active");
+        });
+
+        dropzone.addEventListener("dragleave", function() {
+            dropzone.classList.remove("active");
+        });
+
+        dropzone.addEventListener("drop", function(e) {
+            e.preventDefault();
+            dropzone.classList.remove("active");
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileName();
+            }
+        });
+
+        fileInput.addEventListener("change", updateFileName);
+
+        function updateFileName() {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                fileName.textContent = "Keine Datei ausgewählt";
+            }
+        }
+
+        // Upload-Formular Submission
+        document.getElementById("upload-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            // Hier würde der tatsächliche Upload-Code kommen
+            alert("Vielen Dank! Dein Video wurde erfolgreich hochgeladen und wird nun von unserem Team bearbeitet.");
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            this.reset();
+            fileName.textContent = "Keine Datei ausgewählt";
+        });
+    </script>
+</body>
+</html>

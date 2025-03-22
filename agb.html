@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allgemeine Geschäftsbedingungen - Tierliebe verbindet</title>
+    <style>
+        /* Grundlegende Reset-Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Farbpalette */
+        :root {
+            --primary: #4F6F52;      /* Olivgrün */
+            --secondary: #8D7B68;    /* Erdton */
+            --accent: #D14D72;       /* Highlight-Rot */
+            --light-accent: #A4907C; /* Helles Erdbraun */
+            --background: #F8F5F0;   /* Helles Creme */
+            --text: #333333;         /* Dunkler Text */
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header-Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .paw {
+            width: 60%;
+            height: 60%;
+            position: relative;
+        }
+
+        .paw::before,
+        .paw::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .paw::before {
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            top: 10%;
+        }
+
+        .paw::after {
+            width: 70%;
+            height: 40%;
+            left: 15%;
+            top: 50%;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--light-accent);
+        }
+
+        nav a.upload {
+            background-color: var(--accent);
+        }
+
+        nav a.upload:hover {
+            background-color: #c03a5f;
+        }
+
+        nav a.login {
+            background-color: var(--light-accent);
+        }
+
+        nav a.login:hover {
+            background-color: var(--primary);
+        }
+
+        /* Hauptinhalt */
+        .main-content {
+            margin-top: 100px;
+            padding: 4rem 0;
+        }
+
+        .terms-container {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        p, ul {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            margin-left: 2rem;
+        }
+
+        .emphasis {
+            background-color: rgba(79, 111, 82, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: white;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        @media (max-width: 992px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="paw"></div>
+                </div>
+                <span class="logo-text">Tierliebe verbindet</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Über uns</a></li>
+                    <li><a href="#" class="upload" title="Die hochgeladenen Videos werden von unserem Team&#10;professionell bearbeitet und&#10;auf unseren sozialen Netzwerken geteilt!">Upload</a></li>
+                    <li><a href="login.html" class="login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hauptinhalt -->
+    <section class="main-content">
+        <div class="container terms-container">
+            <h1 class="section-title">Allgemeine Geschäftsbedingungen</h1>
+            
+            <div class="emphasis">
+                <p>Stand: 22.03.2025</p>
+                <p>Bitte lesen Sie diese Allgemeinen Geschäftsbedingungen (AGB) sorgfältig durch, bevor Sie die Dienste von "Tierliebe verbindet" nutzen. Diese AGB regeln Ihr Rechtsverhältnis mit uns und enthalten wichtige Informationen zu Ihren Rechten und Pflichten.</p>
+            </div>
+            
+            <h2>1. Geltungsbereich</h2>
+            <p>1.1 Diese AGB gelten für alle Dienste und Angebote der Tierliebe verbindet GmbH (nachfolgend "wir", "uns" oder "Tierliebe verbindet"), die über die Website www.tierliebe-verbindet.de oder zugehörige mobile Anwendungen verfügbar sind.</p>
+            <p>1.2 Mit der Registrierung oder Nutzung unserer Dienste erklären Sie sich mit diesen AGB einverstanden. Falls Sie mit den Bedingungen nicht einverstanden sind, nutzen Sie bitte unsere Dienste nicht.</p>
+            
+            <h2>2. Leistungsbeschreibung</h2>
+            <p>2.1 "Tierliebe verbindet" ist eine Online-Plattform für Tierliebhaber, die den Austausch von Erfahrungen, Bildern und Videos rund um das Thema Tiere ermöglicht.</p>
+            <p>2.2 Zu unseren Diensten gehören unter anderem:</p>
+            <ul>
+                <li>Erstellen eines Benutzerprofils</li>
+                <li>Hochladen und Teilen von Bildern und Videos</li>
+                <li>Kommentieren und Bewerten von Inhalten</li>
+                <li>Teilnahme an Community-Gruppen und -Diskussionen</li>
+                <li>Information über Veranstaltungen und Angebote rund ums Thema Tiere</li>
+            </ul>
+            <p>2.3 Wir behalten uns vor, den Funktionsumfang jederzeit zu ändern, zu erweitern oder einzuschränken.</p>
+            
+            <h2>3. Registrierung und Benutzerkonto</h2>
+            <p>3.1 Für die vollständige Nutzung unserer Dienste ist eine Registrierung erforderlich. Die Registrierung ist kostenlos.</p>
+            <p>3.2 Bei der Registrierung sind wahrheitsgemäße Angaben zu machen. Die Zugangsdaten (insbesondere das Passwort) sind geheim zu halten und vor dem Zugriff Dritter zu schützen.</p>
+            <p>3.3 Jede Person darf nur ein Benutzerkonto erstellen. Die Übertragung von Benutzerkonten ist nicht gestattet.</p>
+            <p>3.4 Wir behalten uns vor, Benutzerkonten zu löschen, die länger als 12 Monate inaktiv sind.</p>
+            
+            <h2>4. Nutzungsrechte und Inhalte</h2>
+            <div class="emphasis">
+                <p>4.1 Mit dem Hochladen von Bildern, Videos oder anderen Inhalten gewähren Sie uns das nicht-exklusive, zeitlich und räumlich unbeschränkte, übertragbare Recht, diese Inhalte zu bearbeiten und auf unserer Plattform sowie auf unseren Social-Media-Kanälen zu veröffentlichen. Dies umfasst das Recht:</p>
+                <ul>
+                    <li>Die Inhalte auf unserer Plattform anzuzeigen und zu speichern</li>
+                    <li>Die Inhalte zu bearbeiten, anzupassen oder zu kürzen</li>
+                    <li>Die Inhalte auf unseren Social-Media-Kanälen zu teilen</li>
+                    <li>Die Inhalte zu Zwecken der Werbung für unsere Plattform zu nutzen</li>
+                </ul>
+            </div>
+            <p>4.2 Sie versichern, dass Sie über alle erforderlichen Rechte an den von Ihnen hochgeladenen Inhalten verfügen und diese keine Rechte Dritter verletzen.</p>
+            <p>4.3 Wir behalten uns vor, Inhalte ohne Angabe von Gründen zu entfernen, insbesondere wenn diese gegen diese AGB oder geltendes Recht verstoßen.</p>
+            
+            <h2>5. Verbotene Inhalte und Verhaltensweisen</h2>
+            <p>5.1 Es ist untersagt, Inhalte hochzuladen oder zu verbreiten, die:</p>
+            <ul>
+                <li>gegen geltendes Recht verstoßen</li>
+                <li>Rechte Dritter verletzen</li>
+                <li>beleidigend, diskriminierend, gewaltverherrlichend oder pornografisch sind</li>
+                <li>Tiere in leidenden oder tierschutzwidrigen Situationen zeigen</li>
+                <li>Werbung für kommerzielle Zwecke enthalten, ohne unsere vorherige Zustimmung</li>
+            </ul>
+            <p>5.2 Es ist weiterhin untersagt:</p>
+            <ul>
+                <li>Die Plattform zu manipulieren oder zu hacken</li>
+                <li>Schadsoftware zu verbreiten</li>
+                <li>Andere Nutzer zu belästigen oder zu bedrohen</li>
+                <li>Sich als eine andere Person auszugeben</li>
+            </ul>
+            
+            <h2>6. Haftung</h2>
+            <p>6.1 Wir haften für Vorsatz und grobe Fahrlässigkeit uneingeschränkt. Bei leichter Fahrlässigkeit haften wir nur bei Verletzung einer wesentlichen Vertragspflicht und der Höhe nach begrenzt auf den vorhersehbaren, vertragstypischen Schaden.</p>
+            <p>6.2 Für von Nutzern eingestellte Inhalte übernehmen wir keine Haftung. Wir sind nicht verpflichtet, diese Inhalte zu überwachen oder auf Rechtsverletzungen zu überprüfen.</p>
+            <p>6.3 Bei Hinweisen auf rechtswidrige Inhalte werden wir umgehend tätig und diese entfernen.</p>
+            
+            <h2>7. Laufzeit und Kündigung</h2>
+            <p>7.1 Der Vertrag zur Nutzung unserer Dienste wird auf unbestimmte Zeit geschlossen.</p>
+            <p>7.2 Sie können Ihr Benutzerkonto jederzeit ohne Einhaltung einer Frist kündigen, indem Sie es in Ihren Kontoeinstellungen löschen.</p>
+            <p>7.3 Wir können den Vertrag mit einer Frist von zwei Wochen kündigen. Das Recht zur außerordentlichen Kündigung bei Verstößen gegen diese AGB bleibt unberührt.</p>
+            <p>7.4 Mit der Kündigung werden Ihr Profil und Ihre persönlichen Daten gelöscht, soweit keine gesetzlichen Aufbewahrungspflichten bestehen. Bereits hochgeladene Inhalte bleiben jedoch auf der Plattform, es sei denn, Sie haben diese vor Kündigung gelöscht.</p>
+            
+            <h2>8. Änderungen der AGB</h2>
+            <p>8.1 Wir behalten uns vor, diese AGB jederzeit zu ändern. Die geänderten Bedingungen werden per E-Mail oder Hinweis auf der Website mindestens zwei Wochen vor ihrem Inkrafttreten angekündigt.</p>
+            <p>8.2 Wenn Sie den geänderten AGB nicht innerhalb von zwei Wochen nach Erhalt der Änderungsankündigung widersprechen, gelten die geänderten AGB als angenommen. Auf die Bedeutung Ihres Schweigens werden wir in der Änderungsankündigung gesondert hinweisen.</p>
+            
+            <h2>9. Schlussbestimmungen</h2>
+            <p>9.1 Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</p>
+            <p>9.2 Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
+            <p>9.3 Bei Fragen oder Beschwerden können Sie sich jederzeit an info@tierliebe-verbindet.de wenden.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Über uns</h3>
+                    <p>Tierliebe verbindet ist eine Plattform für alle Tierliebhaber, um Erfahrungen zu teilen und sich mit Gleichgesinnten zu vernetzen.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span>f</span></a>
+                        <a href="#" aria-label="Twitter"><span>t</span></a>
+                        <a href="#" aria-label="Instagram"><span>i</span></a>
+                        <a href="#" aria-label="YouTube"><span>y</span></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Schnelllinks</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Über uns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ressourcen</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tierpflege-Tipps</a></li>
+                        <li><a href="#">Gesundheitsratgeber</a></li>
+                        <li><a href="#">Trainingsanleitungen</a></li>
+                        <li><a href="#">Tierärzte finden</a></li>
+                        <li><a href="#">Häufige Fragen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Rechtliches</h3>
+                    <ul class="footer-links">
+                        <li><a href="datenschutz.html">Datenschutzerklärung</a></li>
+                        <li><a href="agb.html">AGB</a></li>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Tierliebe verbindet. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

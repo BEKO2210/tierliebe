@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutzerklärung - Tierliebe verbindet</title>
+    <style>
+        /* Grundlegende Reset-Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Farbpalette */
+        :root {
+            --primary: #4F6F52;      /* Olivgrün */
+            --secondary: #8D7B68;    /* Erdton */
+            --accent: #D14D72;       /* Highlight-Rot */
+            --light-accent: #A4907C; /* Helles Erdbraun */
+            --background: #F8F5F0;   /* Helles Creme */
+            --text: #333333;         /* Dunkler Text */
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header-Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .paw {
+            width: 60%;
+            height: 60%;
+            position: relative;
+        }
+
+        .paw::before,
+        .paw::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .paw::before {
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            top: 10%;
+        }
+
+        .paw::after {
+            width: 70%;
+            height: 40%;
+            left: 15%;
+            top: 50%;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--light-accent);
+        }
+
+        nav a.upload {
+            background-color: var(--accent);
+        }
+
+        nav a.upload:hover {
+            background-color: #c03a5f;
+        }
+
+        nav a.login {
+            background-color: #4CAF50;
+        }
+
+        nav a.login:hover {
+            background-color: #3e8e41;
+        }
+
+        /* Hauptinhalt */
+        .main-content {
+            margin-top: 100px;
+            padding: 4rem 0;
+        }
+
+        .privacy-container {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        p, ul {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            margin-left: 2rem;
+        }
+
+        .emphasis {
+            background-color: rgba(79, 111, 82, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: white;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        @media (max-width: 992px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="paw"></div>
+                </div>
+                <span class="logo-text">Tierliebe verbindet</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Über uns</a></li>
+                    <li><a href="#" class="upload" title="Die hochgeladenen Videos werden von unserem Team&#10;professionell bearbeitet und&#10;auf unseren sozialen Netzwerken geteilt!">Upload</a></li>
+                    <li><a href="login.html" class="login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hauptinhalt -->
+    <section class="main-content">
+        <div class="container privacy-container">
+            <h1 class="section-title">Datenschutzerklärung</h1>
+            
+            <div class="emphasis">
+                <p>Stand: 22.03.2025</p>
+                <p>Bei "Tierliebe verbindet" nehmen wir den Schutz Ihrer personenbezogenen Daten sehr ernst. Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und Zweck der Verarbeitung Ihrer Daten auf unserer Plattform gemäß der Datenschutz-Grundverordnung (DSGVO).</p>
+            </div>
+            
+            <h2>1. Verantwortliche Stelle</h2>
+            <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+            <p>
+                Tierliebe verbindet GmbH<br>
+                Tierstraße 1<br>
+                12345 Tierstadt<br>
+                Deutschland
+            </p>
+            <p>
+                E-Mail: datenschutz@tierliebe-verbindet.de<br>
+                Telefon: +49 123 456789
+            </p>
+            
+            <h2>2. Erhebung und Verwendung personenbezogener Daten</h2>
+            <h3>2.1 Registrierung auf unserer Plattform</h3>
+            <p>Bei der Registrierung für ein Benutzerkonto erheben wir folgende Daten:</p>
+            <ul>
+                <li>Name und Vorname</li>
+                <li>E-Mail-Adresse</li>
+                <li>Benutzername</li>
+                <li>Passwort (verschlüsselt gespeichert)</li>
+                <li>Optional: Profilbild</li>
+            </ul>
+            <p>Diese Daten werden zur Erstellung und Verwaltung Ihres Benutzerkontos verwendet und ermöglichen Ihnen die Nutzung aller Funktionen unserer Plattform.</p>
+            
+            <h3>2.2 Hochgeladene Inhalte</h3>
+            <p>Wenn Sie Bilder oder Videos auf unserer Plattform hochladen, werden folgende Daten verarbeitet:</p>
+            <ul>
+                <li>Die Bild- oder Videodatei selbst</li>
+                <li>Von Ihnen angegebene Beschreibungen, Titel und Tags</li>
+                <li>Metadaten der Dateien (sofern nicht automatisch entfernt)</li>
+                <li>Ihr Benutzername als Uploader</li>
+                <li>Datum und Uhrzeit des Uploads</li>
+            </ul>
+            
+            <div class="emphasis">
+                <p><strong>Besonderer Hinweis:</strong> Mit Ihrer Einwilligung werden hochgeladene Bilder und Videos von unserem Team professionell bearbeitet und können auf unseren sozialen Netzwerken geteilt werden. Sie können diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+            </div>
+            
+            <h3>2.3 Kommentare und Interaktionen</h3>
+            <p>Wenn Sie mit Inhalten auf unserer Plattform interagieren (z.B. durch Kommentare, Likes), speichern wir:</p>
+            <ul>
+                <li>Ihren Benutzernamen</li>
+                <li>Den Inhalt des Kommentars</li>
+                <li>Datum und Uhrzeit der Interaktion</li>
+            </ul>
+            
+            <h2>3. Rechtsgrundlagen der Datenverarbeitung</h2>
+            <p>Die Verarbeitung Ihrer Daten erfolgt auf folgenden Rechtsgrundlagen:</p>
+            <ul>
+                <li>Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO (z.B. für die Bearbeitung und Weiterverwendung hochgeladener Inhalte)</li>
+                <li>Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen gemäß Art. 6 Abs. 1 lit. b DSGVO (für die Bereitstellung unserer Dienste)</li>
+                <li>Wahrung berechtigter Interessen gemäß Art. 6 Abs. 1 lit. f DSGVO (z.B. zur Verbesserung unserer Dienste)</li>
+            </ul>
+            
+            <h2>4. Datenweitergabe</h2>
+            <p>Eine Weitergabe Ihrer personenbezogenen Daten an Dritte erfolgt nur in folgenden Fällen:</p>
+            <ul>
+                <li>Wenn Sie ausdrücklich eingewilligt haben (z.B. zur Veröffentlichung auf sozialen Medien)</li>
+                <li>Wenn dies zur Erfüllung unserer vertraglichen Verpflichtungen erforderlich ist (z.B. an Hosting-Provider)</li>
+                <li>Wenn eine rechtliche Verpflichtung zur Weitergabe besteht</li>
+            </ul>
+            
+            <h2>5. Speicherdauer</h2>
+            <p>Wir speichern Ihre personenbezogenen Daten nur so lange, wie es für die Zwecke, für die sie erhoben wurden, erforderlich ist oder solange gesetzliche Aufbewahrungsfristen dies vorschreiben. Konkret bedeutet das:</p>
+            <ul>
+                <li>Kontodaten: Für die Dauer Ihrer Mitgliedschaft und darüber hinaus für die Dauer gesetzlicher Aufbewahrungsfristen</li>
+                <li>Hochgeladene Inhalte: Solange Sie sie nicht löschen oder Ihr Konto deaktivieren</li>
+                <li>Interaktionsdaten: Solange der zugehörige Inhalt auf der Plattform verfügbar ist</li>
+            </ul>
+            
+            <h2>6. Ihre Rechte</h2>
+            <p>Als betroffene Person haben Sie folgende Rechte:</p>
+            <ul>
+                <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+                <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+                <li>Recht auf Löschung (Art. 17 DSGVO)</li>
+                <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+                <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+                <li>Widerspruchsrecht (Art. 21 DSGVO)</li>
+                <li>Recht auf Widerruf einer Einwilligung (Art. 7 Abs. 3 DSGVO)</li>
+                <li>Beschwerderecht bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
+            </ul>
+            <p>Um Ihre Rechte auszuüben, kontaktieren Sie uns bitte unter datenschutz@tierliebe-verbindet.de.</p>
+            
+            <h2>7. Änderungen dieser Datenschutzerklärung</h2>
+            <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Über uns</h3>
+                    <p>Tierliebe verbindet ist eine Plattform für alle Tierliebhaber, um Erfahrungen zu teilen und sich mit Gleichgesinnten zu vernetzen.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span>f</span></a>
+                        <a href="#" aria-label="Twitter"><span>t</span></a>
+                        <a href="#" aria-label="Instagram"><span>i</span></a>
+                        <a href="#" aria-label="YouTube"><span>y</span></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Schnelllinks</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Über uns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ressourcen</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tierpflege-Tipps</a></li>
+                        <li><a href="#">Gesundheitsratgeber</a></li>
+                        <li><a href="#">Trainingsanleitungen</a></li>
+                        <li><a href="#">Tierärzte finden</a></li>
+                        <li><a href="#">Häufige Fragen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Rechtliches</h3>
+                    <ul class="footer-links">
+                        <li><a href="datenschutz.html">Datenschutzerklärung</a></li>
+                        <li><a href="agb.html">AGB</a></li>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Tierliebe verbindet. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

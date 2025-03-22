@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tierliebe verbindet</title>
+    <style>
+        /* Grundlegende Reset-Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Farbpalette */
+        :root {
+            --primary: #4F6F52;      /* Olivgrün */
+            --secondary: #8D7B68;    /* Erdton */
+            --accent: #D14D72;       /* Highlight-Rot */
+            --light-accent: #A4907C; /* Helles Erdbraun */
+            --background: #F8F5F0;   /* Helles Creme */
+            --text: #333333;         /* Dunkler Text */
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header-Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .paw {
+            width: 60%;
+            height: 60%;
+            position: relative;
+        }
+
+        .paw::before,
+        .paw::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .paw::before {
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            top: 10%;
+        }
+
+        .paw::after {
+            width: 70%;
+            height: 40%;
+            left: 15%;
+            top: 50%;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--light-accent);
+        }
+
+        nav a.upload {
+            background-color: var(--accent);
+        }
+
+        nav a.upload:hover {
+            background-color: #c03a5f;
+        }
+
+        nav a.login {
+            background-color: var(--secondary);
+        }
+
+        nav a.login:hover {
+            background-color: #7b6a59;
+        }
+
+        /* Login-Bereich */
+        .login-section {
+            margin-top: 120px;
+            padding: 3rem 0;
+        }
+
+        .auth-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .auth-image {
+            flex: 1;
+            background-image: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8ZG9nLGNhdHx8fHx8fDE3MTEwNDg5NjA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .auth-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(79, 111, 82, 0.6);
+        }
+
+        .auth-image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+
+        .auth-image-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .auth-image-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .auth-form {
+            flex: 1;
+            padding: 3rem;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            border-bottom-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .auth-content {
+            display: none;
+        }
+
+        .auth-content.active {
+            display: block;
+        }
+
+        .auth-form h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .auth-btn:hover {
+            background-color: #3f5a41;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .auth-divider span {
+            padding: 0 1rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: white;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsives Design */
+        @media (max-width: 992px) {
+            .auth-container {
+                flex-direction: column-reverse;
+            }
+            
+            .auth-image, .auth-form {
+                flex: none;
+                width: 100%;
+            }
+            
+            .auth-image {
+                height: 240px;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="paw"></div>
+                </div>
+                <span class="logo-text">Tierliebe verbindet</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="#" class="upload">Upload</a></li>
+                    <li><a href="login.html" class="login active">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-image">
+                    <div class="auth-image-text">
+                        <h2>Werde Teil unserer Community</h2>
+                        <p>Teile deine schönsten Tiermomente, entdecke inspirierende Geschichten und verbinde dich mit Gleichgesinnten.</p>
+                    </div>
+                </div>
+                <div class="auth-form">
+                    <div class="auth-tabs">
+                        <div class="auth-tab active" data-tab="login">Anmelden</div>
+                        <div class="auth-tab" data-tab="register">Registrieren</div>
+                    </div>
+                    <div id="login-form" class="auth-content active">
+                        <h2>Willkommen zurück!</h2>
+                        <form action="login_process.php" method="post">
+                            <div class="input-group">
+                                <label for="email">E-Mail</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="password">Passwort</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <div class="forgot-password">
+                                <a href="#">Passwort vergessen?</a>
+                            </div>
+                            <button type="submit" class="auth-btn">Anmelden</button>
+                        </form>
+                        <div class="auth-divider">
+                            <span>oder</span>
+                        </div>
+                        <div class="social-login">
+                            <button class="social-btn">
+                                <span>G</span>
+                                <span>Mit Google anmelden</span>
+                            </button>
+                            <button class="social-btn">
+                                <span>f</span>
+                                <span>Mit Facebook anmelden</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="register-form" class="auth-content">
+                        <h2>Erstelle ein Konto</h2>
+                        <form action="register_process.php" method="post">
+                            <div class="input-group">
+                                <label for="reg-name">Name</label>
+                                <input type="text" id="reg-name" name="name" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="reg-email">E-Mail</label>
+                                <input type="email" id="reg-email" name="email" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="reg-password">Passwort</label>
+                                <input type="password" id="reg-password" name="password" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="reg-confirm-password">Passwort bestätigen</label>
+                                <input type="password" id="reg-confirm-password" name="confirm_password" required>
+                            </div>
+                            <button type="submit" class="auth-btn">Registrieren</button>
+                        </form>
+                        <div class="auth-divider">
+                            <span>oder</span>
+                        </div>
+                        <div class="social-login">
+                            <button class="social-btn">
+                                <span>G</span>
+                                <span>Mit Google registrieren</span>
+                            </button>
+                            <button class="social-btn">
+                                <span>f</span>
+                                <span>Mit Facebook registrieren</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Über uns</h3>
+                    <p>Tierliebe verbindet ist eine Plattform für alle Tierliebhaber, um Erfahrungen zu teilen und sich mit Gleichgesinnten zu vernetzen.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span>f</span></a>
+                        <a href="#" aria-label="Twitter"><span>t</span></a>
+                        <a href="#" aria-label="Instagram"><span>i</span></a>
+                        <a href="#" aria-label="YouTube"><span>y</span></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Schnelllinks</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Über uns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ressourcen</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tierpflege-Tipps</a></li>
+                        <li><a href="#">Gesundheitsratgeber</a></li>
+                        <li><a href="#">Trainingsanleitungen</a></li>
+                        <li><a href="#">Tierärzte finden</a></li>
+                        <li><a href="#">Häufige Fragen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Rechtliches</h3>
+                    <ul class="footer-links">
+                        <li><a href="datenschutz.html">Datenschutzerklärung</a></li>
+                        <li><a href="agb.html">AGB</a></li>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Tierliebe verbindet. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="cart.js"></script>
+
+    <!-- JavaScript für Funktionalität -->
+    <script>
+        // Tabs-Funktionalität für Login/Register
+        const tabs = document.querySelectorAll('.auth-tab');
+        const authContents = document.querySelectorAll('.auth-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Aktiven Tab markieren
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Entsprechenden Content anzeigen
+                const tabId = tab.getAttribute('data-tab');
+                authContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                if (tabId === 'login') {
+                    document.getElementById('login-form').classList.add('active');
+                } else {
+                    document.getElementById('register-form').classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tierliebe verbindet - Community</title>
+    <style>
+        /* Grundlegende Reset-Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Farbpalette */
+        :root {
+            --primary: #4F6F52;      /* Olivgrün */
+            --secondary: #8D7B68;    /* Erdton */
+            --accent: #D14D72;       /* Highlight-Rot */
+            --light-accent: #A4907C; /* Helles Erdbraun */
+            --background: #F8F5F0;   /* Helles Creme */
+            --text: #333333;         /* Dunkler Text */
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header-Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .paw {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .paw::before, .paw::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .paw::before {
+            width: 12px;
+            height: 12px;
+            left: 9px;
+            top: 9px;
+        }
+
+        .paw::after {
+            width: 5px;
+            height: 5px;
+            bottom: 2px;
+            left: 4px;
+            box-shadow: 9px 0 0 white, 18px 0 0 white;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--light-accent);
+        }
+
+        nav a.upload {
+            background-color: var(--accent);
+        }
+
+        nav a.upload:hover {
+            background-color: #c03a5f;
+        }
+
+        nav a.login {
+            background-color: #4CAF50;
+        }
+
+        nav a.login:hover {
+            background-color: #3e8e41;
+        }
+
+        /* Hero-Bereich */
+        .hero {
+            margin-top: 80px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .hero-content p {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #c03a5f;
+            transform: translateY(-2px);
+        }
+
+        /* Community-Bereich */
+        .section-padding {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            width: 80px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .community-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .community-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .card-text {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .member-count {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .member-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Event-Sektion */
+        .events-section {
+            background-color: #f0ebe5;
+            padding: 4rem 0;
+        }
+
+        .event-list {
+            margin-top: 2rem;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .event-date {
+            min-width: 100px;
+            height: 100px;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            padding: 0.5rem;
+        }
+
+        .event-day {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .event-month {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .event-details {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            color: var(--secondary);
+        }
+
+        .event-location, .event-time {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Community Forum */
+        .forum-section {
+            padding: 4rem 0;
+        }
+
+        .forum-tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .forum-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .forum-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .forum-post {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .post-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .post-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .post-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+            color: var(--secondary);
+        }
+
+        .stats-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Newsletter-Anmeldung */
+        .newsletter {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .newsletter-text {
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            padding: 0 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #c03a5f;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            width: 50px;
+            background-color: var(--accent);
+            bottom: -5px;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content {
+                width: 90%;
+            }
+
+            .event-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .event-details {
+                justify-content: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .newsletter-input, .newsletter-btn {
+                border-radius: 30px;
+            }
+        }
+
+        /* Upload Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.4s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dropzone {
+            border: 2px dashed var(--primary);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: rgba(79, 111, 82, 0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .dropzone:hover {
+            background-color: rgba(79, 111, 82, 0.1);
+        }
+
+        .dropzone-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .file-status {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .consent-section {
+            margin-top: 1.5rem;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            border: 1px solid rgba(79, 111, 82, 0.2);
+        }
+
+        .consent-check {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .consent-check input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .consent-link {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .consent-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            background-color: rgba(79, 111, 82, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .form-submit .btn {
+            padding: 12px 40px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="paw"></div>
+                </div>
+                <span class="logo-text">Tierliebe verbindet</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="community.html" class="active">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="#" class="upload">Upload</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Video hochladen</h2>
+            <form id="upload-form" class="upload-form">
+                <div class="dropzone" id="dropzone">
+                    <div class="dropzone-content">
+                        <span>Dateien hier ablegen oder</span>
+                        <button type="button" class="upload-btn">Durchsuchen</button>
+                        <input type="file" id="file" name="file" accept="video/*" hidden>
+                    </div>
+                    <div class="file-status">
+                        <span class="file-name">Keine Datei ausgewählt</span>
+                    </div>
+                </div>
+
+                <div class="consent-section">
+                    <div class="consent-check">
+                        <input type="checkbox" id="agb-consent" name="agb-consent" required>
+                        <label for="agb-consent">Ich stimme den <a href="agb.html" class="consent-link" target="_blank">Allgemeinen Geschäftsbedingungen</a> zu.</label>
+                    </div>
+                    <div class="consent-check">
+                        <input type="checkbox" id="privacy-consent" name="privacy-consent" required>
+                        <label for="privacy-consent">Ich habe die <a href="datenschutz.html" class="consent-link" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten gemäß der DSGVO zu.</label>
+                    </div>
+                    <div class="consent-check">
+                        <input type="checkbox" id="usage-consent" name="usage-consent" required>
+                        <label for="usage-consent">Ich erteile die Erlaubnis, mein hochgeladenes Video zu bearbeiten und auf den sozialen Medien von "Tierliebe verbindet" zu teilen.</label>
+                    </div>
+                    <div class="consent-info">
+                        <p>Hinweis: "Tierliebe verbindet" wird deine Daten nur für die angegebenen Zwecke verwenden und nicht an Dritte weitergeben, die nicht in unserer Datenschutzerklärung aufgeführt sind. Du kannst deine Einwilligung jederzeit widerrufen, indem du uns unter datenschutz@tierliebe-verbindet.de kontaktierst.</p>
+                    </div>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn">Hochladen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero-Bereich -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Unsere Tier-Community</h1>
+            <p>Entdecke Gleichgesinnte, tausche dich aus und nimm an spannenden Events teil. Hier findest du alles rund um unsere lebendige Gemeinschaft von Tierliebhabern.</p>
+            <a href="#community-groups" class="btn">Gemeinschaften entdecken</a>
+        </div>
+    </section>
+
+    <!-- Community-Gruppen -->
+    <section id="community-groups" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Unsere Community-Gruppen</h2>
+            <p class="text-center">Finde deine Gruppe und tausche dich mit anderen Tierfreunden aus, die ähnliche Interessen haben.</p>
+            
+            <div class="community-grid">
+                <!-- Community-Karte 1 -->
+                <div class="community-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="Hundeliebhaber-Gruppe">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hundeliebhaber</h3>
+                        <p class="card-text">Eine Gemeinschaft für alle, die das Leben mit Hunden lieben und teilen möchten.</p>
+                        <div class="member-count">
+                            <span class="member-icon">👤</span>
+                            <span>1.243 Mitglieder</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Community-Karte 2 -->
+                <div class="community-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="Katzenfreunde-Gruppe">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Katzenfreunde</h3>
+                        <p class="card-text">Für alle, die die samtpfotigen Begleiter lieben und ihre Geschichten teilen möchten.</p>
+                        <div class="member-count">
+                            <span class="member-icon">👤</span>
+                            <span>987 Mitglieder</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Community-Karte 3 -->
+                <div class="community-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="Vogelfreunde-Gruppe">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Vogelfreunde</h3>
+                        <p class="card-text">Für Vogelliebhaber und alle, die sich für gefiederte Freunde interessieren.</p>
+                        <div class="member-count">
+                            <span class="member-icon">👤</span>
+                            <span>562 Mitglieder</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Community-Karte 4 -->
+                <div class="community-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1459682687441-7761439a709d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="Kleintierfreunde-Gruppe">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Kleintierfreunde</h3>
+                        <p class="card-text">Eine Community für Freunde von Kaninchen, Meerschweinchen, Hamstern und Co.</p>
+                        <div class="member-count">
+                            <span class="member-icon">👤</span>
+                            <span>421 Mitglieder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kommende Events -->
+    <section class="events-section">
+        <div class="container">
+            <h2 class="section-title">Kommende Community-Events</h2>
+            <p class="text-center">Nimm an unseren Veranstaltungen teil und lerne andere Tierliebhaber persönlich kennen.</p>
+            
+            <div class="event-list">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="event-day">15</div>
+                        <div class="event-month">Apr</div>
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">Hundetraining im Stadtpark</h3>
+                        <p>Gemeinsames Training und Austausch von Tipps für ein besseres Zusammenleben mit unseren Hunden.</p>
+                        <div class="event-details">
+                            <div class="event-location">
+                                <span>📍</span>
+                                <span>Stadtpark, Haupteingang</span>
+                            </div>
+                            <div class="event-time">
+                                <span>🕒</span>
+                                <span>14:00 - 16:00 Uhr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="event-day">22</div>
+                        <div class="event-month">Apr</div>
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">Tierfotografie-Workshop</h3>
+                        <p>Lerne von Profis, wie du deine Haustiere perfekt in Szene setzen kannst.</p>
+                        <div class="event-details">
+                            <div class="event-location">
+                                <span>📍</span>
+                                <span>Fotostudio Lichtblick</span>
+                            </div>
+                            <div class="event-time">
+                                <span>🕒</span>
+                                <span>10:00 - 13:00 Uhr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="event-day">29</div>
+                        <div class="event-month">Apr</div>
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">Tiergesundheit & Ernährung</h3>
+                        <p>Vortrag eines Tierarztes über gesunde Ernährung und Vorsorge für Haustiere.</p>
+                        <div class="event-details">
+                            <div class="event-location">
+                                <span>📍</span>
+                                <span>Gemeindezentrum</span>
+                            </div>
+                            <div class="event-time">
+                                <span>🕒</span>
+                                <span>18:30 - 20:00 Uhr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Forum -->
+    <section class="forum-section">
+        <div class="container">
+            <h2 class="section-title">Community-Diskussionen</h2>
+            <p class="text-center">Tausche dich mit anderen Mitgliedern über aktuelle Themen aus.</p>
+            
+            <div class="forum-tabs">
+                <div class="forum-tab active">Neueste Beiträge</div>
+                <div class="forum-tab">Beliebteste Themen</div>
+                <div class="forum-tab">Meine Gruppen</div>
+            </div>
+            
+            <div class="forum-posts">
+                <!-- Forum-Beitrag 1 -->
+                <div class="forum-post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="Avatar">
+                            </div>
+                            <div class="author-info">
+                                <div class="author-name">Sarah K.</div>
+                                <div class="post-date">Vor 2 Stunden</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="post-title">Erfahrungen mit hypoallergenen Katzenfutter?</h3>
+                    <div class="post-content">
+                        <p>Meine Katze hat neuerdings Allergiesymptome und der Tierarzt empfiehlt hypoallergenes Futter. Hat jemand Erfahrung damit und kann eine bestimmte Marke empfehlen?</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="stats-item">
+                                <span>💬</span>
+                                <span>12 Antworten</span>
+                            </div>
+                            <div class="stats-item">
+                                <span>❤️</span>
+                                <span>8 Likes</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Antworten</a>
+                    </div>
+                </div>
+                
+                <!-- Forum-Beitrag 2 -->
+                <div class="forum-post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Avatar">
+                            </div>
+                            <div class="author-info">
+                                <div class="author-name">Thomas M.</div>
+                                <div class="post-date">Vor 5 Stunden</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="post-title">Tipps für das erste Hundetraining</h3>
+                    <div class="post-content">
+                        <p>Wir haben seit letzter Woche einen jungen Border Collie bei uns aufgenommen. Welche Grundkommandos sollten wir ihm zuerst beibringen und wie gehen wir dabei am besten vor?</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="stats-item">
+                                <span>💬</span>
+                                <span>24 Antworten</span>
+                            </div>
+                            <div class="stats-item">
+                                <span>❤️</span>
+                                <span>15 Likes</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Antworten</a>
+                    </div>
+                </div>
+                
+                <!-- Forum-Beitrag 3 -->
+                <div class="forum-post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Avatar">
+                            </div>
+                            <div class="author-info">
+                                <div class="author-name">Julia B.</div>
+                                <div class="post-date">Vor 1 Tag</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="post-title">Vogelbeobachtung im Frühjahr - Eure Lieblingsplätze?</h3>
+                    <div class="post-content">
+                        <p>Der Frühling ist da und ich möchte mit meinen Kindern auf Vogelbeobachtungstour gehen. Habt ihr Empfehlungen für besonders gute Orte in der Umgebung? Wir sind mobil und können auch ein Stück fahren.</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="stats-item">
+                                <span>💬</span>
+                                <span>9 Antworten</span>
+                            </div>
+                            <div class="stats-item">
+                                <span>❤️</span>
+                                <span>7 Likes</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Antworten</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter-Anmeldung -->
+    <section class="newsletter">
+        <div class="container">
+            <h2 class="newsletter-title">Bleib auf dem Laufenden!</h2>
+            <p class="newsletter-text">Abonniere unseren Newsletter und erhalte regelmäßig Informationen über kommende Events, Community-Themen und Tipps rund um deine Haustiere.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>
+                <button type="submit" class="newsletter-btn">Abonnieren</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <div class="paw"></div>
+                    </div>
+                    <div class="logo-text">Tierliebe verbindet</div>
+                </div>
+                <p>Eine Community von Tierliebhabern für Tierliebhaber. Teile deine Erfahrungen und finde Gleichgesinnte.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <span>🐦</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <span>📱</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <span>📸</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="#">Beitrag teilen</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Gruppen</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Mitglieder</a></li>
+                    <li><a href="#">Richtlinien</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <ul class="footer-links">
+                    <li>info@tierliebe-verbindet.de</li>
+                    <li>+49 123 456789</li>
+                    <li>Musterstraße 123, 12345 Berlin</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom container">
+            <p>&copy; 2025 Tierliebe verbindet. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Forum-Tab-Funktionalität
+        const tabs = document.querySelectorAll('.forum-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Upload Modal Funktionalität
+        const modal = document.getElementById("uploadModal");
+        const uploadLinks = document.querySelectorAll("a.upload");
+        const closeBtn = document.querySelector(".close-modal");
+        const dropzone = document.getElementById("dropzone");
+        const fileInput = document.getElementById("file");
+        const fileName = document.querySelector(".file-name");
+
+        // Modal öffnen bei Klick auf Upload-Links
+        uploadLinks.forEach(link => {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                modal.style.display = "block";
+                document.body.style.overflow = "hidden"; // Verhindern des Scrollens im Hintergrund
+            });
+        });
+
+        // Modal schließen
+        closeBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+
+        // Schließen wenn außerhalb des Modals geklickt wird
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // Datei-Upload-Funktionalität
+        dropzone.addEventListener("click", function() {
+            fileInput.click();
+        });
+
+        dropzone.addEventListener("dragover", function(e) {
+            e.preventDefault();
+            dropzone.classList.add("active");
+        });
+
+        dropzone.addEventListener("dragleave", function() {
+            dropzone.classList.remove("active");
+        });
+
+        dropzone.addEventListener("drop", function(e) {
+            e.preventDefault();
+            dropzone.classList.remove("active");
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileName();
+            }
+        });
+
+        fileInput.addEventListener("change", updateFileName);
+
+        function updateFileName() {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                fileName.textContent = "Keine Datei ausgewählt";
+            }
+        }
+
+        // Upload-Formular Submission
+        document.getElementById("upload-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            // Hier würde der tatsächliche Upload-Code kommen
+            alert("Vielen Dank! Dein Video wurde erfolgreich hochgeladen und wird nun von unserem Team bearbeitet.");
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            this.reset();
+            fileName.textContent = "Keine Datei ausgewählt";
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
